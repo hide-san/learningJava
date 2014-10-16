@@ -23,4 +23,11 @@ public class CharArrayTest {
 
         assertEquals("Hideo", aString);
     }
+
+    @Test
+    public void testCharStringToArray() throws Exception {
+        char[] chars = "Hideo".toCharArray();
+
+        assertArrayEquals(new char[]{'H', 'i', 'd', 'e', 'o'}, chars);
+    }
 }
