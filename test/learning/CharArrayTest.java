@@ -25,7 +25,7 @@ public class CharArrayTest {
     }
 
     @Test
-    public void testCharStringToArray() throws Exception {
+    public void testCharToString() throws Exception {
         char[] chars = "Hideo".toCharArray();
 
         assertArrayEquals(new char[]{'H', 'i', 'd', 'e', 'o'}, chars);
