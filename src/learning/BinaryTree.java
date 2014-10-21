@@ -19,20 +19,20 @@ public class BinaryTree {
         this.right = right;
     }
 
-    //状況に合った子ノードを返す(DFS用)
-    private BinaryTree[] getChildrenDfs() {
-        if (left != null && right != null) {
-            BinaryTree[] o = {right, left};
-            return o;
-        } else if (left != null && right == null) {
-            BinaryTree[] o = {left};
-            return o;
-        } else if (left == null && right != null) {
-            BinaryTree[] o = {right};
-            return o;
+    public void bfs(BinaryTree t, Object goal) {
+        Queue<BinaryTree> queue = new ArrayDeque<BinaryTree>();
+        queue.offer(t);
+        while (!queue.isEmpty()) {
+            BinaryTree t1 = queue.poll();
+            System.out.println(t1.data + "を訪れました");
+            if (t1.data == goal) {
+                System.out.println("目標" + goal + "に到達しました");
+                break;
+            }
+            for (BinaryTree t2 : t1.getChildrenBfs()) {
+                queue.offer(t2);
+            }
         }
-        BinaryTree[] o = {};
-        return o;
     }
 
     public void dfs(BinaryTree t, Object goal) {
@@ -64,35 +64,33 @@ public class BinaryTree {
         return false;
     }
 
-    //状況に合った子ノードを返す(BFS用)
-    private BinaryTree[] getChildrenBfs() {
+    //状況に合った子ノードを返す(DFS用)
+    private BinaryTree[] getChildrenDfs() {
+        BinaryTree[] o;
         if (left != null && right != null) {
-            BinaryTree[] o = {left, right};
-            return o;
-        } else if (left != null && right == null) {
-            BinaryTree[] o = {left};
-            return o;
-        } else if (left == null && right != null) {
-            BinaryTree[] o = {right};
-            return o;
+            o = new BinaryTree[]{right, left};
+        } else if (left != null) {
+            o = new BinaryTree[]{left};
+        } else if (right != null) {
+            o = new BinaryTree[]{right};
+        } else {
+            o = new BinaryTree[]{};
         }
-        BinaryTree[] o = {};
         return o;
     }
 
-    public void bfs(BinaryTree t, Object goal) {
-        Queue<BinaryTree> queue = new ArrayDeque<BinaryTree>();
-        queue.offer(t);
-        while (!queue.isEmpty()) {
-            BinaryTree t1 = queue.poll();
-            System.out.println(t1.data + "を訪れました");
-            if (t1.data == goal) {
-                System.out.println("目標" + goal + "に到達しました");
-                break;
-            }
-            for (BinaryTree t2 : t1.getChildrenBfs()) {
-                queue.offer(t2);
-            }
+    //状況に合った子ノードを返す(BFS用)
+    private BinaryTree[] getChildrenBfs() {
+        BinaryTree[] o;
+        if (left != null && right != null) {
+            o = new BinaryTree[]{left, right};
+        } else if (left != null) {
+            o = new BinaryTree[]{left};
+        } else if (right != null) {
+            o = new BinaryTree[]{right};
+        } else {
+            o = new BinaryTree[]{};
         }
+        return o;
     }
 }
